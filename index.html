@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Image Gallery</title>
+</head>
+
+<body>
+    <div>
+        <button class="btn btn-outline-info m-3" data-target="#mymodal" data-toggle="modal">Pricing</button>
+        <div class="modal" id="mymodal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-center">Contact Us</h3>
+                        <button class="close" data-dismiss="modal">x</button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="submit-to-google-sheet">
+                            <div>
+                                <label for="name"><i class="fa fa-user"></i> Name</label>
+                                <input name="Name" type="text" placeholder="Name" class="form-control">
+                            </div>
+                            <br>
+                            <div>
+                                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                <input name="Email" type="email" placeholder="Email" class="form-control">
+                            </div>
+                            <br>
+                            <div>
+                                <label><i class="fa fa-comments"></i> Order Comments</label>
+                                <textarea name="Order_comments" class="form-control" id="Order_comments" cols="20"
+                                    rows="10"></textarea>
+                            </div>
+                            <br>
+                            <button type="submit" id="submit-form" class="btn btn-success mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://wzrd.in/standalone/formdata-polyfill"></script>
+    <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+    <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxFJA1s9179rgvsFu23DVnasw2vQOXmI8je_YiuH_CYnl4fYZCs/exec'
+        const form = document.forms['submit-to-google-sheet']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
